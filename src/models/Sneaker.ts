@@ -9,7 +9,7 @@ const SneakerSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Por favor, informe a descrição do tênis'],
   },
-  rating: {
+  starRating: {
     type: Number,
     required: [true, 'Por favor, informe a avaliação do tênis'],
   },
@@ -21,25 +21,63 @@ const SneakerSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Por favor, informe qual o tipo do tênis'],
   },
-  traction: {
-    type: Number,
-    required: [true, 'Por favor, informe a tração do tênis'],
-  },
-  cushion: {
-    type: Number,
-    required: [true, 'Por favor, informe o conforto do tênis'],
-  },
-  material: {
-    type: Number,
-    required: [true, 'Por favor, informe a qualidade do material do tênis'],
-  },
-  support: {
-    type: Number,
-    required: [true, 'Por favor, informe o suporte do tênis'],
-  },
-  fit: {
-    type: Number,
-    required: [true, 'Por favor, informe o ajuste do tênis'],
+  stats: [
+    {
+      name: {
+        type: String,
+        required: [true, 'Por favor, informe o nome tração'],
+      },
+      value: {
+        type: Number,
+        required: [true, 'Por favor, informe o valor de tração do tênis'],
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: [true, 'Por favor, informe o nome conforto'],
+      },
+      value: {
+        type: Number,
+        required: [true, 'Por favor, informe o valor de conforto do tênis'],
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: [true, 'Por favor, informe o nome material'],
+      },
+      value: {
+        type: Number,
+        required: [
+          true,
+          'Por favor, informe o valor de qualidade do material do tênis',
+        ],
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: [true, 'Por favor, informe o nome suporte'],
+      },
+      value: {
+        type: Number,
+        required: [true, 'Por favor, informe o valor de suporte do tênis'],
+      },
+    },
+    {
+      name: {
+        type: String,
+        required: [true, 'Por favor, informe o nome ajuste'],
+      },
+      value: {
+        type: Number,
+        required: [true, 'Por favor, informe o valor do ajuste do tênis'],
+      },
+    },
+  ],
+  url: {
+    type: String,
   },
 });
 
