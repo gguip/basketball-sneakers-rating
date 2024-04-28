@@ -5,10 +5,10 @@ import { Inter } from 'next/font/google';
 import { api } from '@/services/api';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Pagination from './components/Pagination';
+import SelectInput from './components/SelectInput';
 import SneakerCard from './components/SneakerCard';
 import { SneakerProps } from '@/interfaces/sneaker.interface';
-import SelectInput from './components/SelectInput';
-import Pagination from './components/Pagination';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,12 +19,24 @@ export default function Home() {
     api
       .get('api/sneaker')
       .then((response) => {
-        setSneakersData(response.data);
+        console.log('🚀 ~ file: index.tsx:22 ~ .then ~ response:', response);
+        setSneakersData(response.data.data);
       })
       .catch((error) => {
         toast.error('Não foi possível exibir os tênis');
       });
   }, []);
+
+  // useEffect(() => {
+  //   api
+  //     .post('api/sneaker')
+  //     .then((response) => {
+  //       toast.success('Deu certo');
+  //     })
+  //     .catch((error) => {
+  //       toast.error('Não foi possível cadastrar o tenis.');
+  //     });
+  // }, []);
 
   return (
     <main
@@ -35,7 +47,7 @@ export default function Home() {
         <SelectInput />
       </div>
       <div className='flex flex-row gap-5'>
-        {sneakersData.map((sneaker, index) => (
+        {sneakersData?.map((sneaker, index) => (
           <SneakerCard sneaker={sneaker} key={index} />
         ))}
       </div>

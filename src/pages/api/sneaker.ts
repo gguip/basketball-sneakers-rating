@@ -1,15 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import dbConnect from '@/lib/mongodb';
-import Sneaker from '@/models/Sneaker';
 import { SneakerProps } from '@/interfaces/sneaker.interface';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SneakerProps[]>
+  res: NextApiResponse
 ) {
-  await dbConnect();
   const data: SneakerProps[] = [
     {
       name: 'Nike LeBron NXXT',
@@ -105,5 +102,27 @@ export default async function handler(
       url: 'https://www.nike.com.br/tenis-cosmic-unity-2-023091.html',
     },
   ];
+
+  switch (req.method) {
+    case 'GET':
+      try {
+        res.status(201).json({ success: true, data: data });
+      } catch (error) {
+        console.log('🚀 ~ file: sneaker.ts:113 ~ error:', error);
+      }
+
+    case 'POST':
+      try {
+        // const { data } = req.body;
+
+        console.log('🚀 ~ file: sneaker.ts:120 ~ res:', res);
+        res.status(201).json({ success: true, data: 1 });
+      } catch (error) {
+        console.log('🚀 ~ file: sneaker.ts:22 ~ handler ~ error:', error);
+        res.status(400).json({ success: false });
+      }
+      break;
+  }
+
   res.status(200).json(data);
 }
